@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import scrolledtext
 import os
@@ -30,13 +31,14 @@ class ShellEmulator(tk.Tk):
         # ЭТАП 3: Структуры VFS
         self.files = {}
         self.dirs = set()
+        self.file_permissions = {}  # ЭТАП 5: Права доступа для файлов
         self.current_dir = "/"
 
         # ЭТАП 3: Загрузка VFS
         if self.vfs_path:
-            self.load_vfs(self.vfs_path)   # Загрузка из ZIP архива
+            self.load_vfs(self.vfs_path)  # Загрузка из ZIP архива
         else:
-            self.create_default_vfs()      # Создание VFS по умолчанию
+            self.create_default_vfs()  # Создание VFS по умолчанию
 
         # ЭТАП 1: Настройка переменных окружения
         if 'HOME' not in os.environ and 'USERPROFILE' in os.environ:
@@ -45,8 +47,8 @@ class ShellEmulator(tk.Tk):
         # ЭТАП 1: Инициализация REPL
         self.history = []
         self.history_index = -1
-        self.setup_ui()                  # Настройка графического интерфейса
-        self.display_welcome()           # Приветственное сообщение
+        self.setup_ui()  # Настройка графического интерфейса
+        self.display_welcome()  # Приветственное сообщение
 
         # ЭТАП 2: Запуск стартового скрипта
         if self.startup_script:
@@ -71,6 +73,8 @@ class ShellEmulator(tk.Tk):
                         with zip_ref.open(path) as file:
                             content = file.read().decode('utf-8')
                             self.files[path] = content
+                            # ЭТАП 5: Устанавливаем права по умолчанию
+                            self.file_permissions[path] = '644'
 
                         # Добавляем родительскую директорию
                         dir_path = os.path.dirname(path)
@@ -96,6 +100,10 @@ class ShellEmulator(tk.Tk):
         }
         # ЭТАП 3: Структура с 3+ уровнями вложенности
         self.dirs = {"", "bin", "docs", "home", "home/user", "home/user/documents", "var", "var/log"}
+
+        # ЭТАП 5: Инициализация прав доступа для файлов по умолчанию
+        for file_path in self.files.keys():
+            self.file_permissions[file_path] = '644'
 
     def list_dir(self, path):
         # ЭТАП 4: Список содержимого директории
@@ -166,11 +174,11 @@ class ShellEmulator(tk.Tk):
         # ЭТАП 1: Приветственное сообщение
         self.display_output("Shell Emulator - Variant 26")
         self.display_output(f"VFS: {self.vfs_path or 'default'}")
-        self.display_output("Commands: ls, cd, history, du, exit")
+        self.display_output("Commands: ls, cd, history, du, rm, chmod, exit")
         self.display_output("-" * 50)
 
     def display_output(self, text):
-        #ЭТАП 1: Вывод текста в интерфейс
+        # ЭТАП 1: Вывод текста в интерфейс
         self.output_area.config(state='normal')
         self.output_area.insert(tk.END, text + "\n")
         self.output_area.config(state='disabled')
@@ -207,8 +215,12 @@ class ShellEmulator(tk.Tk):
             self.command_history(args)
         elif command == "du":
             self.command_du(args)
-        elif command == "pwd":  # Добавлена команда pwd
+        elif command == "pwd":
             self.command_pwd(args)
+        elif command == "rm":  # ЭТАП 5: Команда rm
+            self.command_rm(args)
+        elif command == "chmod":  # ЭТАП 5: Команда chmod
+            self.command_chmod(args)
         elif command == "exit":
             self.quit()
         else:
@@ -222,7 +234,13 @@ class ShellEmulator(tk.Tk):
             for d in dirs:
                 self.display_output(f"  {d}/")
             for f in files:
-                self.display_output(f"  {f}")
+                # ЭТАП 5: Показываем права доступа для файлов
+                file_path = os.path.join(path, f) if path != "/" else f
+                if file_path in self.file_permissions:
+                    perms = self.file_permissions[file_path]
+                    self.display_output(f"  -rw-r--r-- {perms} {f}")
+                else:
+                    self.display_output(f"  {f}")
             if not dirs and not files:
                 self.display_output("  (empty)")
         except:
@@ -272,6 +290,61 @@ class ShellEmulator(tk.Tk):
                 self.display_output(f"{file_size:8}  {os.path.basename(file_path)}")
 
         self.display_output(f"{total_size:8}  .")
+
+    # ЭТАП 5: Команда rm - удаление файлов
+    def command_rm(self, args):
+        if not args:
+            self.display_output("rm: missing operand")
+            return
+
+        filename = args[0]
+
+        # Полный путь к файлу
+        if self.current_dir == "/":
+            full_path = filename
+        else:
+            full_path = f"{self.current_dir}/{filename}"
+
+        # Проверяем существование файла
+        if full_path in self.files:
+            # Удаляем файл и его права доступа
+            del self.files[full_path]
+            if full_path in self.file_permissions:
+                del self.file_permissions[full_path]
+            self.display_output(f"Removed file: {filename}")
+        else:
+            self.display_output(f"rm: cannot remove '{filename}': No such file")
+
+    # ЭТАП 5: Команда chmod - изменение прав доступа
+    def command_chmod(self, args):
+        if len(args) < 2:
+            self.display_output("chmod: missing operand")
+            self.display_output("Usage: chmod <mode> <file>")
+            return
+
+        mode = args[0]
+        filename = args[1]
+
+        # Полный путь к файлу
+        if self.current_dir == "/":
+            full_path = filename
+        else:
+            full_path = f"{self.current_dir}/{filename}"
+
+        # Проверяем существование файла
+        if full_path not in self.files:
+            self.display_output(f"chmod: cannot access '{filename}': No such file")
+            return
+
+        # Проверяем корректность режима (должен быть 3 цифры)
+        if not re.match(r'^[0-7]{3}$', mode):
+            self.display_output(f"chmod: invalid mode: '{mode}'")
+            self.display_output("Mode should be 3 digits (0-7)")
+            return
+
+        # Устанавливаем новые права доступа
+        self.file_permissions[full_path] = mode
+        self.display_output(f"Changed permissions of '{filename}' to {mode}")
 
     # ЭТАП 2: Выполнение стартового скрипта
     def run_startup_script(self):

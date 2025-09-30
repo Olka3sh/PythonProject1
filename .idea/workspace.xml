@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0dbf85a9-2e4b-4273-b7c8-4fe55e02e5e5" name="Changes" comment="Реализован третий этап, отредактирован и улучшен второй этап">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="0dbf85a9-2e4b-4273-b7c8-4fe55e02e5e5" name="Changes" comment="Реализован четвертый этап">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/demo_commands.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/demo_commands.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/test_with_script.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/test_with_script.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/test_with_vfs.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/test_with_vfs.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759234561715</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Реализован четвертый этап">
+      <option name="closed" value="true" />
+      <created>1759235227882</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1759235227882</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -146,6 +155,7 @@
     <MESSAGE value="улучшен первый этап практической работы" />
     <MESSAGE value="реализован второй этап практической работы," />
     <MESSAGE value="Реализован третий этап, отредактирован и улучшен второй этап" />
-    <option name="LAST_COMMIT_MESSAGE" value="Реализован третий этап, отредактирован и улучшен второй этап" />
+    <MESSAGE value="Реализован четвертый этап" />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализован четвертый этап" />
   </component>
 </project>

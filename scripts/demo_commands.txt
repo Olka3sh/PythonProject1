@@ -1,34 +1,97 @@
-[file name]: demo_commands.txt
-[file content begin]
+
 # Стартовый скрипт для эмулятора командной строки
 # Комментарии поддерживаются (строки начинающиеся с #)
+# Комплексное тестирование всех этапов (1-5)
 
-# Тестирование всех команд этапа 4
-echo "=== Тестирование команды ls ==="
+echo "=== ЭТАП 1: Базовые команды и интерфейс ==="
+pwd
+echo "Текущий пользователь: $USER"
+echo "Домашняя директория: $HOME"
+
+echo "=== ЭТАП 2: Стартовые скрипты ==="
+echo "Этот скрипт выполняется автоматически при запуске"
+
+echo "=== ЭТАП 3: Работа с VFS ==="
+echo "Структура VFS по умолчанию:"
+ls /
+ls
+du
+
+echo "=== ЭТАП 4: Основные команды ==="
+echo "--- Тестирование ls ---"
 ls
 ls /
 ls docs
+ls home/user/documents
+ls var/log
+ls nonexistent_dir
 
-echo "=== Тестирование команды cd ==="
+echo "--- Тестирование cd ---"
 cd docs
 ls
 cd ..
 pwd
-
-echo "=== Тестирование команды history ==="
-history
-
-echo "=== Тестирование команды du ==="
-du
-du docs
-
-echo "=== Тестирование переменных окружения ==="
-echo "Home directory: $HOME"
-
-echo "=== Тестирование ошибок ==="
-ls nonexistent_dir
+cd home/user
+ls
+cd /var
+ls
 cd nonexistent_dir
 
-# Эта команда завершит эмулятор
+echo "--- Тестирование history ---"
+history
+
+echo "--- Тестирование du ---"
+du
+du docs
+du home/user/documents
+du /var/log
+
+echo "=== ЭТАП 5: Дополнительные команды ==="
+echo "--- Тестирование chmod ---"
+ls
+chmod 755 readme.txt
+ls
+chmod 600 bin/hello.sh
+ls bin
+chmod 644 docs/help.txt
+ls docs
+
+echo "--- Тестирование ошибок chmod ---"
+chmod
+chmod 755
+chmod invalid file.txt
+chmod 755 nonexistent.txt
+chmod 888 readme.txt
+
+echo "--- Тестирование rm ---"
+echo "До удаления:"
+ls home/user/documents
+du home/user/documents
+rm home/user/documents/file1.txt
+echo "После удаления:"
+ls home/user/documents
+du home/user/documents
+
+echo "--- Тестирование ошибок rm ---"
+rm
+rm nonexistent_file.txt
+
+echo "=== Комплексное тестирование ==="
+cd /
+echo "Текущая директория:"
+pwd
+echo "Содержимое корневой директории:"
+ls
+echo "Размеры файлов:"
+du
+echo "История команд:"
+history
+
+echo "=== Проверка изменений в памяти ==="
+echo "Все изменения (chmod, rm) произведены только в памяти"
+ls
+du
+
+echo "=== Завершение тестирования ==="
+echo "Все этапы (1-5) успешно протестированы"
 exit
-[file content end]

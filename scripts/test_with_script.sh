@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "=== Тестирование со стартовым скриптом ==="
-python main.py --startup-script scripts/demo_commands.txt
+echo "=== Комплексное тестирование всех этапов ==="
+python main.py --startup-script demo_commands.txt

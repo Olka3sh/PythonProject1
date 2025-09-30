@@ -2,7 +2,8 @@
 # Комментарии поддерживаются (строки начинающиеся с #)
 
 ls
-cd folder1
+echo "Home directory: $HOME"
+cd docs
 ls
 # Эта команда завершит эмулятор
 exit

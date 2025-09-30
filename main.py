@@ -5,11 +5,22 @@ import platform
 import getpass
 import shlex
 import re
+import argparse
 
+
+def parse_arguments():
+    """Парсинг аргументов командной строки для этапа 2"""
+    parser = argparse.ArgumentParser(description='Shell Emulator - Variant 26')
+    parser.add_argument('--vfs-path', help='Path to VFS ZIP archive')
+    parser.add_argument('--startup-script', help='Path to startup script')
+    return parser.parse_args()
 
 class ShellEmulator(tk.Tk):
-    def __init__(self):
+    def __init__(self, vfs_path = None, startup_script = None):
         super().__init__()
+        # Этап 2: Сохраняем параметры конфигурации
+        self.vfs_path = vfs_path
+        self.startup_script = startup_script
         if 'HOME' not in os.environ and 'USERPROFILE' in os.environ:    # Настройка переменных окружения
             os.environ['HOME'] = os.environ['USERPROFILE']
 
@@ -17,7 +28,12 @@ class ShellEmulator(tk.Tk):
         self.history_index = -1
         self._setup_ui()
         self._display_welcome()
-        self._display_prompt()
+
+        # Этап 2: Если указан стартовый скрипт - выполняем его
+        if startup_script:
+            self.after(100, self._run_startup_script)
+        else:
+            self._display_prompt()
 
     # 1.1: Приложение в форме GUI
     def _setup_ui(self):
@@ -53,6 +69,11 @@ class ShellEmulator(tk.Tk):
         self._display_output("Welcome to the Shell Emulator!")
         self._display_output("Available commands: ls, cd, exit")
         self._display_output("Environment variable expansion supported: $HOME, $USER, etc.")
+        self._display_output("-" * 50)
+        # Этап 2: Отладочный вывод всех заданных параметров
+        self._display_output("Параметры конфигурации:")
+        self._display_output(f"  VFS path: {self.vfs_path}")
+        self._display_output(f"  Startup script: {self.startup_script}")
         self._display_output("-" * 50)
 
     def _display_output(self, text):
@@ -126,6 +147,8 @@ class ShellEmulator(tk.Tk):
             self._command_cd(args)
         elif command == "exit":
             self.quit()
+        elif command == "echo":  # ДОБАВИТЬ КОМАНДУ ECHO ДЛЯ СКРИПТОВ
+            self._command_echo(args)
         else:                                                   # 1.6: Обработка ошибок - неизвестная команда
             raw = command_line.strip()
             if len(parts) == 1:
@@ -147,7 +170,48 @@ class ShellEmulator(tk.Tk):
             self._display_output("Would change to home directory")
         self._display_output("(this is a stub implementation)")
 
+    def _command_echo(self, args):
+        """Команда echo для вывода текста (нужна для скриптов)"""
+        if args:
+            self._display_output(" ".join(args))
+        else:
+            self._display_output("")
+
+    # ДОБАВИТЬ МЕТОД _run_startup_script В КЛАСС ShellEmulator
+    def _run_startup_script(self):
+        if not os.path.exists(self.startup_script):
+            self._display_output(f"Error: Script file not found: {self.startup_script}")
+            return
+        try:
+            with open(self.startup_script, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    # Пропускаем пустые строки и комментарии
+                    if not line or line.startswith('#'):
+                        continue
+
+                    self._display_output(f"> {line}")
+                    try:
+                        self._execute_command(line)
+                    except Exception as e:
+                        # ВАЖНО: НЕ останавливаем выполнение при ошибке
+                        # Просто выводим сообщение и продолжаем
+                        self._display_output(f"Error in script: {e}")
+                        # Продолжаем выполнение следующих команд
+                        continue
+
+        except Exception as e:
+            self._display_output(f"Error reading script file: {e}")
+
+        self._display_prompt()
 
 if __name__ == "__main__":
-    app = ShellEmulator()
+    # Этап 2: Парсинг аргументов командной строки
+    args = parse_arguments()
+
+    # Создаем приложение с передачей параметров
+    app = ShellEmulator(
+        vfs_path=args.vfs_path,
+        startup_script=args.startup_script
+    )
     app.mainloop()

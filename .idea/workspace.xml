@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0dbf85a9-2e4b-4273-b7c8-4fe55e02e5e5" name="Changes" comment="practice_1">
+    <list default="true" id="0dbf85a9-2e4b-4273-b7c8-4fe55e02e5e5" name="Changes" comment="улучшен первый этап практической работы">
+      <change afterPath="$PROJECT_DIR$/scripts/demo_commands.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/test_basic.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/test_with_script.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/test_with_vfs.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PythonProject1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonProject1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main1.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,9 +56,10 @@
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;C:\\Users\\User\\AppData\\Roaming\\JetBrains\\PyCharm2025.2\\plugins\\Shell Script\\shellcheck.exe&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/PythonProject1&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -112,11 +120,20 @@
       <option name="project" value="LOCAL" />
       <updated>1758371063588</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="улучшен первый этап практической работы">
+      <option name="closed" value="true" />
+      <created>1759224749462</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759224749462</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="practice_1" />
-    <option name="LAST_COMMIT_MESSAGE" value="practice_1" />
+    <MESSAGE value="улучшен первый этап практической работы" />
+    <option name="LAST_COMMIT_MESSAGE" value="улучшен первый этап практической работы" />
   </component>
 </project>

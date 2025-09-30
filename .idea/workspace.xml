@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0dbf85a9-2e4b-4273-b7c8-4fe55e02e5e5" name="Changes" comment="улучшен первый этап практической работы">
-      <change afterPath="$PROJECT_DIR$/scripts/demo_commands.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/test_basic.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/test_with_script.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/test_with_vfs.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PythonProject1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonProject1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0dbf85a9-2e4b-4273-b7c8-4fe55e02e5e5" name="Changes" comment="Реализован третий этап, отредактирован и улучшен второй этап">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/demo_commands.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/demo_commands.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,12 +122,30 @@
       <option name="project" value="LOCAL" />
       <updated>1759224749462</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="реализован второй этап практической работы,">
+      <option name="closed" value="true" />
+      <created>1759230769134</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759230769134</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Реализован третий этап, отредактирован и улучшен второй этап">
+      <option name="closed" value="true" />
+      <created>1759234561715</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759234561715</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="practice_1" />
     <MESSAGE value="улучшен первый этап практической работы" />
-    <option name="LAST_COMMIT_MESSAGE" value="улучшен первый этап практической работы" />
+    <MESSAGE value="реализован второй этап практической работы," />
+    <MESSAGE value="Реализован третий этап, отредактирован и улучшен второй этап" />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализован третий этап, отредактирован и улучшен второй этап" />
   </component>
 </project>

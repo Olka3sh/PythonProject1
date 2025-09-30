@@ -103,6 +103,17 @@ class ShellEmulator(tk.Tk):
             path = self.current_dir
         elif path == "..":
             path = self.get_parent_dir(self.current_dir)
+        elif not path.startswith("/"):
+            # Относительный путь
+            if self.current_dir == "/":
+                path = "/" + path
+            else:
+                path = self.current_dir + "/" + path
+
+            # Убедимся, что путь нормализован
+        path = path.rstrip("/")
+        if path == "":
+            path = "/"
 
         files = []
         dirs = []
@@ -196,6 +207,8 @@ class ShellEmulator(tk.Tk):
             self.command_history(args)
         elif command == "du":
             self.command_du(args)
+        elif command == "pwd":  # Добавлена команда pwd
+            self.command_pwd(args)
         elif command == "exit":
             self.quit()
         else:
@@ -242,6 +255,9 @@ class ShellEmulator(tk.Tk):
     def command_history(self, args):
         for i, cmd in enumerate(self.history, 1):
             self.display_output(f"{i}  {cmd}")
+
+    def command_pwd(self, args):
+        self.display_output(self.current_dir)
 
     def command_du(self, args):
         path = args[0] if args else self.current_dir

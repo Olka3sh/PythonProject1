@@ -1,9 +1,34 @@
+[file name]: demo_commands.txt
+[file content begin]
 # Стартовый скрипт для эмулятора командной строки
 # Комментарии поддерживаются (строки начинающиеся с #)
 
+# Тестирование всех команд этапа 4
+echo "=== Тестирование команды ls ==="
 ls
-echo "Home directory: $HOME"
+ls /
+ls docs
+
+echo "=== Тестирование команды cd ==="
 cd docs
 ls
+cd ..
+pwd
+
+echo "=== Тестирование команды history ==="
+history
+
+echo "=== Тестирование команды du ==="
+du
+du docs
+
+echo "=== Тестирование переменных окружения ==="
+echo "Home directory: $HOME"
+
+echo "=== Тестирование ошибок ==="
+ls nonexistent_dir
+cd nonexistent_dir
+
 # Эта команда завершит эмулятор
 exit
+[file content end]

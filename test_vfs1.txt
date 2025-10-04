@@ -1,0 +1,5 @@
+ls
+cd folder1
+ls
+cd ..
+du

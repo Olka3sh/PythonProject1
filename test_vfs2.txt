@@ -1,0 +1,5 @@
+chmod 755 folder1/script_vfs1.txt
+ls folder1
+rm folder2/script_vfs2.txt
+ls folder2
+history

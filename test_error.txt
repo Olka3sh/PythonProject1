@@ -1,0 +1,5 @@
+cd nonexistent
+rm not_found.txt
+chmod 888 folder1/script_vfs1
+chmod 755
+ls /invalid/path
